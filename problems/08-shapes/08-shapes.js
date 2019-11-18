@@ -22,4 +22,82 @@ Example for printShape("Diamond", 5, "*");
 */
 function printShape(shape, height, character) {
   
+  switch(shape){
+    
+    case `Square`:{
+      
+      //height
+      for(let i = 0; i < height; i++){
+        let line = ``
+
+        //width
+        //square has the same height and width
+        for(let j = 0; j < height; j++){
+          line += character
+        }
+        
+        console.log(line);
+      }
+      break
+    }
+
+    case `Triangle`:{
+
+      //height
+      for(let i = 0; i < height; i++){
+        let line = ``
+
+        //each new line add one more character
+        for(let j = 0; j < 1 + i; j++){
+          line += character
+        }
+
+        console.log(line);
+      }
+      break
+    }
+
+    case `Diamond`:{
+      //find the middle
+      let middle = height / 2
+      let charactersArray = []
+
+      //populate array with placeholders
+      for (let i = 0; i < height; i++){
+        charactersArray[i] = ` `
+      }
+
+      for(let i = 0; i < middle; i++){
+        charactersArray[Math.trunc(middle)] = character
+        charactersArray[Math.trunc(middle) - i] = character
+        charactersArray[Math.trunc(middle) + i] = character
+        let line = charactersArray.reduce((accum, ele) =>{
+          return accum + ele
+        })
+        console.log(line);
+        
+      }
+
+      for(let i = Math.trunc(middle); i > 0; i--){
+        charactersArray[Math.trunc(middle) - i] = ` `
+        charactersArray[Math.trunc(middle) + i] = ` `
+        let line = charactersArray.reduce((accum, ele) =>{
+          return accum + ele
+        })
+        console.log(line);
+        
+      }
+      break
+
+    }
+    default:
+      console.log(`Shape unknown`);
+      break
+      
+  }
 }
+
+printShape(`Square`, 4, '#')
+printShape(`Triangle`, 6, '&')
+printShape(`Diamond`, 5, '%')
+printShape('Ellipse', 4, "*")
